@@ -325,6 +325,7 @@ export default function Example() {
                         <Button
                           className="group flex justify-start rounded-md px-2 py-2 text-sm font-medium w-full"
                           variant="ghost"
+                          key={item.name}
                         >
                           <item.icon
                             className={classNames(
@@ -367,6 +368,7 @@ export default function Example() {
                   <Button
                     className="group flex justify-start rounded-md px-2 py-2 text-sm font-medium w-full"
                     variant="ghost"
+                    key={item.name}
                   >
                     <item.icon
                       className={classNames(
@@ -389,6 +391,7 @@ export default function Example() {
                         <Button
                           className="group flex justify-start rounded-md px-2 py-2 text-sm font-medium w-full"
                           variant="ghost"
+                          key={item.name}
                         >
                           <item.icon
                             className={classNames(
@@ -412,6 +415,7 @@ export default function Example() {
                   <Button
                     className="group flex justify-start rounded-md px-2 py-2 text-sm font-medium w-full"
                     variant="ghost"
+                    key={item.name}
                   >
                     <item.icon
                       className={classNames(
@@ -941,8 +945,8 @@ export default function Example() {
                             Notifications
                           </h3>
                           <p className="mt-1 text-sm text-gray-600">
-                            Decide which communications you'd like to receive
-                            and how.
+                            Decide which communications you would like to
+                            receive and how.
                           </p>
                         </div>
                       </div>
