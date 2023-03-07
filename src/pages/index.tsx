@@ -789,6 +789,7 @@ export default function Example() {
                                     type="file"
                                     className="file:rounded-md"
                                     onInput={(e) => {
+                                      // @ts-ignore
                                       setImageFile(e.target.files[0]);
                                     }}
                                   />
