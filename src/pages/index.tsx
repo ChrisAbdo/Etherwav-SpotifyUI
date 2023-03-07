@@ -1,4 +1,6 @@
 import { Fragment, useState, useEffect } from "react";
+import { motion } from "framer-motion";
+
 import { Dialog, Menu, Transition } from "@headlessui/react";
 import {
   Bars3BottomLeftIcon,
@@ -59,7 +61,7 @@ const navigation = [
 const people = [
   {
     name: "Jane Cooper",
-    title: "Regional Paradigm Technician",
+    title: "0x696...69691",
     role: "Admin",
     email: "janecooper@example.com",
     telephone: "+1-202-555-0170",
@@ -68,7 +70,7 @@ const people = [
   },
   {
     name: "Jane Cooper",
-    title: "Regional Paradigm Technician",
+    title: "0x696...69692",
     role: "Admin",
     email: "janecooper@example.com",
     telephone: "+1-202-555-0170",
@@ -77,7 +79,7 @@ const people = [
   },
   {
     name: "Jane Cooper",
-    title: "Regional Paradigm Technician",
+    title: "0x696...69693",
     role: "Admin",
     email: "janecooper@example.com",
     telephone: "+1-202-555-0170",
@@ -86,7 +88,7 @@ const people = [
   },
   {
     name: "Jane Cooper",
-    title: "Regional Paradigm Technician",
+    title: "0x696...6969",
     role: "Admin",
     email: "janecooper@example.com",
     telephone: "+1-202-555-0170",
@@ -99,7 +101,7 @@ const people = [
 const people2 = [
   {
     name: "Jane Cooper",
-    title: "Paradigm Representative",
+    title: "0x696...6969",
     role: "Admin",
     email: "janecooper@example.com",
     telephone: "+1-202-555-0170",
@@ -252,6 +254,8 @@ export default function Example() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const [hoveredIndexes, setHoveredIndexes] = useState([]);
 
   useEffect(() => {
     setMounted(true);
@@ -351,7 +355,7 @@ export default function Example() {
         </Transition.Root>
 
         {/* Static sidebar for desktop */}
-        <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col h-full">
+        <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col h-full z-50">
           {/* Sidebar component, swap this element with another sidebar if you like */}
           <div className="flex min-h-0 flex-1 flex-col bg-white dark:bg-black over">
             <div className="flex h-16 flex-shrink-0 items-center bg-white dark:bg-black px-4">
@@ -516,32 +520,54 @@ export default function Example() {
                       role="list"
                       className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-2"
                     >
-                      {people.map((person) => (
-                        <li
+                      {people.map((person, index) => (
+                        <motion.li
                           key={person.email}
-                          className="col-span-1 divide-y divide-gray-200 rounded-lg bg-white dark:bg-neutral-700/25 dark:hover:bg-neutral-600 shadow transition-all duration-200 z-40 border border-white dark:border-neutral-600"
+                          className="col-span-1 divide-y divide-gray-200 rounded-lg bg-white dark:bg-neutral-700/25 dark:hover:bg-neutral-600 shadow transition-all duration-500 z-40 border border-white dark:border-neutral-600"
+                          onMouseEnter={() => {
+                            const newHoveredIndexes = [...hoveredIndexes];
+                            // @ts-ignore
+                            newHoveredIndexes[index] = true;
+                            setHoveredIndexes(newHoveredIndexes);
+                          }}
+                          onMouseLeave={() => {
+                            const newHoveredIndexes = [...hoveredIndexes];
+                            // @ts-ignore
+                            newHoveredIndexes[index] = false;
+                            setHoveredIndexes(newHoveredIndexes);
+                          }}
                         >
-                          <div className="flex w-full items-center justify-between space-x-6 p-6">
+                          <div className="flex items-center justify-between space-x-6 p-6">
+                            <img
+                              className="h-20 w-20 flex-shrink-0 rounded-md bg-gray-300 mr-6"
+                              src={person.imageUrl}
+                              alt=""
+                            />
                             <div className="flex-1 truncate">
                               <div className="flex items-center space-x-3">
                                 <h3 className="truncate text-sm font-medium text-gray-900 dark:text-white">
                                   {person.name}
                                 </h3>
-                                <span className="inline-block flex-shrink-0 rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-800">
-                                  {person.role}
-                                </span>
                               </div>
                               <p className="mt-1 truncate text-sm text-gray-500 dark:text-[#eaeaea]">
                                 {person.title}
                               </p>
                             </div>
-                            <img
-                              className="h-10 w-10 flex-shrink-0 rounded-full bg-gray-300"
-                              src={person.imageUrl}
-                              alt=""
-                            />
+                            {hoveredIndexes[index] && (
+                              <motion.button
+                                className="ml-auto"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{
+                                  opacity: hoveredIndexes[index] ? 1 : 0,
+                                  y: hoveredIndexes[index] ? 0 : 20,
+                                }}
+                                transition={{ duration: 0.2 }}
+                              >
+                                <PlayCircleIcon className="h-12 w-12 text-gray-400" />
+                              </motion.button>
+                            )}
                           </div>
-                        </li>
+                        </motion.li>
                       ))}
                     </ul>
                     <div className="mt-6">
@@ -559,7 +585,7 @@ export default function Example() {
                         {people2.map((person) => (
                           <li
                             key={person.email}
-                            className="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white dark:bg-neutral-800 dark:hover:bg-neutral-700 text-center shadow transition-all duration-200"
+                            className="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white dark:bg-neutral-800 dark:hover:bg-neutral-700 text-center shadow transition-all duration-500 z-40"
                           >
                             <div className="flex flex-1 flex-col p-8">
                               <img
@@ -574,12 +600,6 @@ export default function Example() {
                                 <dt className="sr-only">Title</dt>
                                 <dd className="text-sm text-gray-500 dark:text-[#eaeaea]">
                                   {person.title}
-                                </dd>
-                                <dt className="sr-only">Role</dt>
-                                <dd className="mt-3">
-                                  <span className="rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-800">
-                                    {person.role}
-                                  </span>
                                 </dd>
                               </dl>
                             </div>
@@ -1076,7 +1096,8 @@ export default function Example() {
                 </TabsContent>
               </Tabs>
             </div>
-            <div className="flex justify-between bg-gray-100 dark:bg-neutral-900 w-full fixed bottom-0 left-0 py-2 px-2">
+
+            <div className="flex justify-between bg-gray-100 dark:bg-neutral-900 w-full fixed bottom-0 left-0 py-5 px-5 z-50">
               <div className="flex items-center">
                 <img
                   src="https://avatars.githubusercontent.com/u/66892203?v=4"
