@@ -384,7 +384,7 @@ export default function Example() {
                 ))}
                 <Separator />
 
-                <ScrollArea className="h-96 rounded-md">
+                <ScrollArea className="h-[35rem] rounded-md">
                   {[...Array(4)].map((_, index) => (
                     <Fragment key={index}>
                       {navigation.map((item) => (
@@ -437,12 +437,13 @@ export default function Example() {
           <main className="flex-1 bg-gray-100 dark:bg-neutral-900">
             <div className="">
               <Tabs defaultValue="account" className="w-full">
-                <TabsList className="flex sticky top-0 z-50 rounded-none">
-                  <TabsTrigger value="account">Radio</TabsTrigger>
+                <TabsList className="flex sticky top-0 z-50 rounded-none dark:bg-neutral-900">
+                  <TabsTrigger value="account">Listen</TabsTrigger>
                   <TabsTrigger value="password">Upload Music</TabsTrigger>
 
                   {/* <Button className="ml-auto">Login</Button> */}
-                  <DropdownMenu>
+
+                  {/* <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button size="sm" variant="ghost" className="ml-auto">
                         <SunIcon className="w-6 h-6" />
@@ -476,10 +477,38 @@ export default function Example() {
                         </DropdownMenuItem>
                       </DropdownMenuGroup>
                     </DropdownMenuContent>
-                  </DropdownMenu>
+                  </DropdownMenu> */}
+                  <Button variant="outline" size="sm" className="ml-auto">
+                    Connect Wallet
+                  </Button>
                 </TabsList>
                 <TabsContent value="account">
                   <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                    <div className="absolute inset-x-0 top-[-10rem] transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]">
+                      <svg
+                        className="relative left-[calc(50%-11rem)] -z-10 h-[21.1875rem] max-w-none -translate-x-1/5 rotate-[30deg] sm:left-[calc(50%-30rem)] sm:h-[42.375rem]"
+                        viewBox="0 0 1155 678"
+                      >
+                        <path
+                          fill="url(#45de2b6b-92d5-4d68-a6a0-9b9b2abad533)"
+                          fillOpacity=".3"
+                          d="M317.219 518.975L203.852 678 0 438.341l317.219 80.634 204.172-286.402c1.307 132.337 45.083 346.658 209.733 145.248C936.936 126.058 882.053-94.234 1031.02 41.331c119.18 108.451 130.68 295.337 121.53 375.223L855 299l21.173 362.054-558.954-142.079z"
+                        />
+                        <defs>
+                          <linearGradient
+                            id="45de2b6b-92d5-4d68-a6a0-9b9b2abad533"
+                            x1="1155.49"
+                            x2="-78.208"
+                            y1=".177"
+                            y2="474.645"
+                            gradientUnits="userSpaceOnUse"
+                          >
+                            <stop stopColor="#9089FC" />
+                            <stop offset={1} stopColor="#FF80B5" />
+                          </linearGradient>
+                        </defs>
+                      </svg>
+                    </div>
                     <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">
                       Top Heat
                     </h1>
@@ -490,19 +519,19 @@ export default function Example() {
                       {people.map((person) => (
                         <li
                           key={person.email}
-                          className="col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow"
+                          className="col-span-1 divide-y divide-gray-200 rounded-lg bg-white dark:bg-neutral-700/25 dark:hover:bg-neutral-600 shadow transition-all duration-200 z-40 border border-white dark:border-neutral-600"
                         >
                           <div className="flex w-full items-center justify-between space-x-6 p-6">
                             <div className="flex-1 truncate">
                               <div className="flex items-center space-x-3">
-                                <h3 className="truncate text-sm font-medium text-gray-900">
+                                <h3 className="truncate text-sm font-medium text-gray-900 dark:text-white">
                                   {person.name}
                                 </h3>
                                 <span className="inline-block flex-shrink-0 rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-800">
                                   {person.role}
                                 </span>
                               </div>
-                              <p className="mt-1 truncate text-sm text-gray-500">
+                              <p className="mt-1 truncate text-sm text-gray-500 dark:text-[#eaeaea]">
                                 {person.title}
                               </p>
                             </div>
@@ -511,34 +540,6 @@ export default function Example() {
                               src={person.imageUrl}
                               alt=""
                             />
-                          </div>
-                          <div>
-                            <div className="-mt-px flex divide-x divide-gray-200">
-                              <div className="flex w-0 flex-1">
-                                <a
-                                  href={`mailto:${person.email}`}
-                                  className="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900"
-                                >
-                                  <EnvelopeIcon
-                                    className="h-5 w-5 text-gray-400"
-                                    aria-hidden="true"
-                                  />
-                                  Email
-                                </a>
-                              </div>
-                              <div className="-ml-px flex w-0 flex-1">
-                                <a
-                                  href={`tel:${person.telephone}`}
-                                  className="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900"
-                                >
-                                  <PhoneIcon
-                                    className="h-5 w-5 text-gray-400"
-                                    aria-hidden="true"
-                                  />
-                                  Call
-                                </a>
-                              </div>
-                            </div>
                           </div>
                         </li>
                       ))}
@@ -558,20 +559,20 @@ export default function Example() {
                         {people2.map((person) => (
                           <li
                             key={person.email}
-                            className="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow"
+                            className="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white dark:bg-neutral-800 dark:hover:bg-neutral-700 text-center shadow transition-all duration-200"
                           >
                             <div className="flex flex-1 flex-col p-8">
                               <img
-                                className="mx-auto h-32 w-32 flex-shrink-0 rounded-full"
+                                className="mx-auto h-32 w-32 flex-shrink-0 rounded-md"
                                 src={person.imageUrl}
                                 alt=""
                               />
-                              <h3 className="mt-6 text-sm font-medium text-gray-900">
+                              <h3 className="mt-6 text-sm font-medium text-gray-900 dark:text-white">
                                 {person.name}
                               </h3>
                               <dl className="mt-1 flex flex-grow flex-col justify-between">
                                 <dt className="sr-only">Title</dt>
-                                <dd className="text-sm text-gray-500">
+                                <dd className="text-sm text-gray-500 dark:text-[#eaeaea]">
                                   {person.title}
                                 </dd>
                                 <dt className="sr-only">Role</dt>
@@ -582,36 +583,10 @@ export default function Example() {
                                 </dd>
                               </dl>
                             </div>
-                            <div>
-                              <div className="-mt-px flex divide-x divide-gray-200">
-                                <div className="flex w-0 flex-1">
-                                  <a
-                                    href={`mailto:${person.email}`}
-                                    className="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900"
-                                  >
-                                    <EnvelopeIcon
-                                      className="h-5 w-5 text-gray-400"
-                                      aria-hidden="true"
-                                    />
-                                    Email
-                                  </a>
-                                </div>
-                                <div className="-ml-px flex w-0 flex-1">
-                                  <a
-                                    href={`tel:${person.telephone}`}
-                                    className="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900"
-                                  >
-                                    <PhoneIcon
-                                      className="h-5 w-5 text-gray-400"
-                                      aria-hidden="true"
-                                    />
-                                    Call
-                                  </a>
-                                </div>
-                              </div>
-                            </div>
                           </li>
                         ))}
+                        <br />
+                        <br />
                       </ul>
                     </div>
                   </div>
@@ -1101,7 +1076,7 @@ export default function Example() {
                 </TabsContent>
               </Tabs>
             </div>
-            <div className="flex justify-between bg-gray-100 dark:bg-neutral-900 w-full fixed bottom-0 left-0 py-6 px-6">
+            <div className="flex justify-between bg-gray-100 dark:bg-neutral-900 w-full fixed bottom-0 left-0 py-2 px-2">
               <div className="flex items-center">
                 <img
                   src="https://avatars.githubusercontent.com/u/66892203?v=4"
